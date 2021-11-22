@@ -25,6 +25,28 @@ test('Wins counter shows up', async () => {
     expect(displayed).toBe(true)
 })
 
+test("Clicking 'Draw' button displays div with id='choices'", async () => {
+    await driver.findElement(By.id("draw")).click()
+    await driver.sleep(500)
+    const choices = await driver.findElement(By.id("choices"))
+    const displayed = await choices.isDisplayed()
+    expect(displayed).toBe(true)
+})
+
+test("Check that adding duo displays id='player duo'", async () => {
+    await driver.findElement(By.id("draw")).click()
+    await driver.sleep(500)
+    await driver.findElement(By.xpath('//button[text()="Add to Duo"])[1]')).click()
+
+    const playerDuo = await driver.findElement(By.id("player-duo"))
+    const displayed = await playerDuo.isDisplayed()
+    expect(displayed).toBe(true)
+})
+
+test("Removed bot goes back to choices", async () => {
+    await driver.findElement(By.id("draw")).click()
+    await driver.sleep
+})
 // describe('counters working', async () => {
 //     test('wins counter works', async () => {
 //     const results = await driver.findElement(By.id('results')).getText

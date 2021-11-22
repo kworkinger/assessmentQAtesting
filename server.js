@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/js', express.static(path.join(__dirname, 'public/index.js')))
-app.use('/css', express.static(path.join(__dirname, 'public/index.css')))
+app.use('/styles', express.static(path.join(__dirname, 'public/index.css')))
 
 app.get('/api/robots', (req, res) => {
     try {
