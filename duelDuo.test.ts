@@ -45,22 +45,13 @@ test("Check that adding duo displays id='player duo'", async () => {
 
 test("Removed bot goes back to choices", async () => {
     await driver.findElement(By.id("draw")).click()
-    await driver.sleep
-})
-// describe('counters working', async () => {
-//     test('wins counter works', async () => {
-//     const results = await driver.findElement(By.id('results')).getText
-//     const wins = await driver.findElement(By.id('wins'))
-//     if(results === "You Won"){
-//     expect(results).toBe("Wins: 1")
-//     }
-//     })
+    await driver.sleep(500)
+    await driver.findElement(By.xpath('//button[text()="Add to Duo"])[1]')).click()
 
-//     test('losses counter works', async () => {
-//     const results = await driver.findElement(By.id('results')).getText
-//     const losses = await driver.findElement(By.id('losses'))
-//     if(results === "You Lost"){
-//         expect(results).toBe("Losses: 1")
-//     }
-//     })
-// })
+    await driver.findElement(By.xpath('//button[text()="Remove from Duo"])')).click()
+
+    await returnedCard = await driver.findElement(By.xpath('//div[@class="bot-card outline"][5]'))
+
+    const displayed = await returnedCard.isDisplayed()
+    expect(displayed).toBe(true)
+})

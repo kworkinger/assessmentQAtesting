@@ -26,10 +26,12 @@ app.use('/styles', express.static(path.join(__dirname, 'public/index.css')))
 
 app.get('/api/robots', (req, res) => {
     try {
-        res.status(200).send(botsArr)
+        res.status(200).send(bots)
+        rollbar.info('Robot data rendered')
     } catch (error) {
         console.log('ERROR GETTING BOTS', error)
         res.sendStatus(400)
+        rollbar.error("Error retreiving bot data", error)
     }
 })
 
@@ -39,9 +41,11 @@ app.get('/api/robots/five', (req, res) => {
         let choices = shuffled.slice(0, 5)
         let compDuo = shuffled.slice(6, 8)
         res.status(200).send({choices, compDuo})
+        rollbar.info('Robots rendered')
     } catch (error) {
         console.log('ERROR GETTING FIVE BOTS', error)
         res.sendStatus(400)
+        rollbar.error("Something went wrong", error)
     }
 })
 
@@ -73,15 +77,18 @@ app.post('/api/duel', (req, res) => {
     } catch (error) {
         console.log('ERROR DUELING', error)
         res.sendStatus(400)
+        rollbar.error("Something went wrong", error)
     }
 })
 
 app.get('/api/player', (req, res) => {
     try {
         res.status(200).send(playerRecord)
+        rollbar.info("Computer bots rendered")
     } catch (error) {
         console.log('ERROR GETTING PLAYER STATS', error)
         res.sendStatus(400)
+        rollbar.error("Something went wrong", error)
     }
 })
 

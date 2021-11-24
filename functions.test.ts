@@ -15,7 +15,7 @@ describe('shuffleArray should', () => {
     })
     test('items shuffled', () => {
         let shuffle = shuffleArray(arr)
-        expect(shuffle).not.toBe(arr)
+        expect(shuffle.join()).not.toEqual(arr.join())
     })
 
 })
